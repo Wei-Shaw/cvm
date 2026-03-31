@@ -14,6 +14,50 @@ Claude Code 发布频繁 —— 有时一天多次。你可能需要：
 
 CVM 让这一切只需一个命令即可完成。
 
+## 先卸载官方 Claude Code
+
+CVM 通过 shim 管理自己的 `claude` 二进制文件。为避免冲突，**在使用 CVM 之前必须先卸载官方 Claude Code**。
+
+<details>
+<summary><strong>npm（全局安装）</strong></summary>
+
+```bash
+npm uninstall -g @anthropic-ai/claude-code
+```
+</details>
+
+<details>
+<summary><strong>macOS (Homebrew)</strong></summary>
+
+```bash
+brew uninstall claude-code
+```
+</details>
+
+<details>
+<summary><strong>Linux（原生二进制 / 独立安装）</strong></summary>
+
+```bash
+# 如果通过官方安装脚本安装
+rm -f /usr/local/bin/claude
+
+# 如果安装到 ~/.local/bin
+rm -f ~/.local/bin/claude
+```
+
+如果你不确定 `claude` 安装在哪里：
+
+```bash
+which claude
+```
+</details>
+
+卸载后，验证 `claude` 已不再可用：
+
+```bash
+which claude  # 应该没有返回或显示 "not found"
+```
+
 ## 快速开始
 
 ```bash
