@@ -273,12 +273,14 @@ When you run `claude`, the shim script in `~/.cvm/bin/` resolves the `active` sy
 
 The entry point (`cli.js` vs `start.js`) is read from each version's `package.json` at `cvm use` time and baked into the shim, so it adapts to structural changes across Claude Code versions.
 
-### Proxy Patching
+### Reverse Proxy Strategy
 
-Claude Code ships as a minified JavaScript bundle (`cli.js`, ~7 MB). The proxy patcher performs literal string replacement on the bundled file — replacing hardcoded Anthropic domain strings with your proxy URL. This approach is:
+In certain restricted network environments (e.g., corporate firewalls, regional network policies), direct access to Anthropic's API endpoints may be unavailable. The proxy patching feature provides a **reverse proxy strategy** to address this — it redirects API traffic through a user-controlled reverse proxy server so that Claude Code can function normally under these constraints.
+
+The patch works by performing literal string replacement on the bundled CLI file (`cli.js`, ~7 MB), swapping hardcoded Anthropic domain strings with your reverse proxy URL. This approach is:
 
 - **Version-stable** — URL strings don't change with minification; they're the same across all versions
-- **Non-destructive** — the original file is backed up and can be restored at any time
+- **Non-destructive** — the original file is backed up before any modification and can be restored at any time via `cvm patch revert`
 - **Idempotent** — patches are always applied from the pristine backup, never stacked
 
 ## Platform Support
