@@ -1,3 +1,5 @@
+[English](README.md) | [中文](README_CN.md)
+
 # CVM - Claude Code Version Manager
 
 Manage multiple versions of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with ease. Install, switch, and patch — like [nvm](https://github.com/nvm-sh/nvm) for Claude Code.
